@@ -32,6 +32,8 @@ while not should_stop:
         elif option == "report":
             valid_option = True
             print_report()
+        else:
+            print("You typed an invalid option. Please choose again.")
 
     # 1b. The prompt should show every time action has completed, e.g. once the drink is dispensed. The prompt should show again to serve the next customer
 
