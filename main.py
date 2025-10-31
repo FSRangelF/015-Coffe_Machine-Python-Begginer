@@ -1,9 +1,8 @@
-# 1. Prompt user by asking “What would you like? (espresso/latte/cappuccino):”
-    # a. Check the user’s input to decide what to do next.
-    # b. The prompt should show every time action has completed, e.g. once the drink is dispensed. The prompt should show again to serve the next customer
+import art
+import resources
 
-# 2. Turn off the Coffee Machine by entering “off” to the prompt.
-    # a. For maintainers of the coffee machine, they can use “off” as the secret word to turn off the machine. Your code should end execution when this happens.
+current_resources = resources.resources
+should_stop = False
 
 # 3. Print report.
     # a. When the user enters “report” to the prompt, a report should be generated that shows the current resource values. e.g.
@@ -11,6 +10,33 @@
         # Milk: 50ml
         # Coffee: 76g
         # Money: $2.5
+def print_report():
+    print(f"Report:")
+    print(f"    Water: {current_resources["water"]}")
+    print(f"    Milk: {current_resources["milk"]}")
+    print(f"    Coffee: {current_resources["coffee"]}")
+    print(f"    Money: {current_resources["money"]}") 
+
+while not should_stop:
+    print(art.logo)
+# 1. Prompt user by asking “What would you like? (espresso/latte/cappuccino):”
+    # a. Check the user’s input to decide what to do next.
+    valid_option = False
+    while not valid_option:
+        option = input("What would you like? (espresso/latte/cappuccino): ").lower()
+        if option == "off":
+# 2. Turn off the Coffee Machine by entering “off” to the prompt. For maintainers of the coffee machine, they can use “off” as the secret word to turn off the machine. Your code should end execution when this happens.
+            valid_option = True
+            should_stop = True
+            print("Good Bye!")
+        elif option == "report":
+            valid_option = True
+            print_report()
+
+    # 1b. The prompt should show every time action has completed, e.g. once the drink is dispensed. The prompt should show again to serve the next customer
+
+
+
 
 # 4. Check resources sufficient?
     # a. When the user chooses a drink, the program should check if there are enough resources to make that drink.
