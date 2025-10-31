@@ -56,7 +56,18 @@ def make_coffee(menu_option):
     # b. E.g. if Latte requires 200ml water but there is only 100ml left in the machine. It should not continue to make the drink but print: “Sorry there is not enough water.”
     # c. The same should happen if another resource is depleted, e.g. milk or coffee.
 def suficient_resources(menu_option):
-    return True
+    missing = []
+    if current_resources["water"] < resources.MENU[menu_option]["ingredients"]["water"]:
+        missing.append ("water")
+    if current_resources["milk"] < resources.MENU[menu_option]["ingredients"]["milk"]:
+        missing.append ("milk")
+    if current_resources["coffee"] < resources.MENU[menu_option]["ingredients"]["coffee"]:
+        missing.append ("coffee")
+    if len(missing) > 0: 
+        print(f"Sorry there is not enough {missing}.")
+        return False
+    else:    
+        return True
 
 while not should_stop:
     print(art.logo)
@@ -76,7 +87,7 @@ while not should_stop:
             print_report()
         elif option in resources.MENU:
             valid_option = True
-            if suficient_resources:
+            if suficient_resources(option):
                 prompt_payment()
                 if transaction_successful():
                     make_coffee(option)
