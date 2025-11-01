@@ -72,7 +72,7 @@ def transaction_successful(payment, menu_option):
             # Money: $2.5
         # b. Once all resources have been deducted, tell the user “Here is your latte. Enjoy!”. If latte was their choice of drink.
 def make_coffee(menu_option):
-    
+
     print("Here is your {menu_option}. Enjoy!")
 
 # 4. Check resources sufficient?
@@ -88,8 +88,14 @@ def suficient_resources(menu_option):
     if current_resources["coffee"] < resources.MENU[menu_option]["ingredients"]["coffee"]:
         missing.append ("coffee")
     if len(missing) > 0: 
-        print(f"Sorry there is not enough {missing}.")
-        return False
+        missing_str = ""
+        for item in missing:
+            if missing.index(item) == len(missing)-1 and len(missing) > 1: 
+                missing_str = missing_str + " and " + str(item)
+            else: 
+                missing_str = missing_str + " " + str(item)
+        print(f"Sorry there is not enough{missing_str}.")
+        return 
     else:    
         return True
 
