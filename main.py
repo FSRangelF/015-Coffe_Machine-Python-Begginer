@@ -76,7 +76,7 @@ def make_coffee(menu_option):
     current_resources["milk"] -= resources.MENU[menu_option]["ingredients"]["milk"]
     current_resources["coffee"] -= resources.MENU[menu_option]["ingredients"]["coffee"]
     current_resources["money"] += resources.MENU[menu_option]["cost"]
-    print(f"Here is your {menu_option.title()}. Enjoy!")
+    print(f"Here is your {menu_option.title()} ☕. Enjoy!")
 
 # 4. Check resources sufficient?
     # a. When the user chooses a drink, the program should check if there are enough resources to make that drink.
