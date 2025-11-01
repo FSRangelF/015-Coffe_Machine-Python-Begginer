@@ -49,8 +49,14 @@ def prompt_payment():
         # Money: $2.5
     # c. If the user has inserted too much money, the machine should offer change. E.g. “Here is $2.45 dollars in change.” The change should be rounded to 2 decimal places.
 def transaction_successful(payment, menu_option):
-    
-    return True
+    if payment == resources.MENU[menu_option]["cost"]:
+       return True
+    elif payment > resources.MENU[menu_option]["cost"]:
+       print(f"Here is ${payment-resources.MENU[menu_option]["cost"]} change")
+       return True
+    else:
+       print(f"Sorry that's not enough money. ${payment} refunded")
+       return False
 
     # 7. Make Coffee.
         # a. If the transaction is successful and there are enough resources to make the drink the user selected, then the ingredients to make the drink should be deducted from the coffee machine resources.
@@ -66,7 +72,8 @@ def transaction_successful(payment, menu_option):
             # Money: $2.5
         # b. Once all resources have been deducted, tell the user “Here is your latte. Enjoy!”. If latte was their choice of drink.
 def make_coffee(menu_option):
-    print("Here is your latte. Enjoy!")
+    
+    print("Here is your {menu_option}. Enjoy!")
 
 # 4. Check resources sufficient?
     # a. When the user chooses a drink, the program should check if there are enough resources to make that drink.
@@ -106,7 +113,6 @@ while not should_stop:
             valid_option = True
             if suficient_resources(option):
                 money_amount = prompt_payment()
-                print(money_amount)
                 if transaction_successful(money_amount, option):
                     make_coffee(option)
         else:
