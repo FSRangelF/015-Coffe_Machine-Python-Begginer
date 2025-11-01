@@ -38,7 +38,7 @@ def prompt_payment():
         pennie = int(input("How many pennies you want to insert: "))
     except ValueError:
         pennie = 0
-    return quarter*0.25 + dime*0.1 + nickel*0.05 + pennie*0.01
+    return round(quarter*0.25 + dime*0.1 + nickel*0.05 + pennie*0.01, 2)
   
 # 6. Check transaction successful?
     # a. Check that the user has inserted enough money to purchase the drink they selected. E.g Latte cost $2.50, but they only inserted $0.52 then after counting the coins the program should say “Sorry that's not enough money. Money refunded.”.
@@ -52,10 +52,10 @@ def transaction_successful(payment, menu_option):
     if payment == resources.MENU[menu_option]["cost"]:
        return True
     elif payment > resources.MENU[menu_option]["cost"]:
-       print(f"Here is ${payment-resources.MENU[menu_option]["cost"]} change")
+       print("Here is ${:.2f} change".format(payment-resources.MENU[menu_option]["cost"]))
        return True
     else:
-       print(f"Sorry that's not enough money. ${payment} refunded")
+       print("Sorry that's not enough money. ${:.2f} refunded".format(payment))
        return False
 
     # 7. Make Coffee.
@@ -72,8 +72,11 @@ def transaction_successful(payment, menu_option):
             # Money: $2.5
         # b. Once all resources have been deducted, tell the user “Here is your latte. Enjoy!”. If latte was their choice of drink.
 def make_coffee(menu_option):
-
-    print("Here is your {menu_option}. Enjoy!")
+    current_resources["water"] -= resources.MENU[menu_option]["ingredients"]["water"]
+    current_resources["milk"] -= resources.MENU[menu_option]["ingredients"]["milk"]
+    current_resources["coffee"] -= resources.MENU[menu_option]["ingredients"]["coffee"]
+    current_resources["money"] += resources.MENU[menu_option]["cost"]
+    print(f"Here is your {menu_option.title()}. Enjoy!")
 
 # 4. Check resources sufficient?
     # a. When the user chooses a drink, the program should check if there are enough resources to make that drink.
@@ -90,7 +93,7 @@ def suficient_resources(menu_option):
     if len(missing) > 0: 
         missing_str = ""
         for item in missing:
-            if missing.index(item) == len(missing)-1 and len(missing) > 1: 
+            if missing.index(item) == len(missing) - 1 and len(missing) > 1: 
                 missing_str = missing_str + " and " + str(item)
             else: 
                 missing_str = missing_str + " " + str(item)
