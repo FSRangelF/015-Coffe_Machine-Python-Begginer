@@ -12,10 +12,10 @@ should_stop = False
         # Money: $2.5
 def print_report():
     print(f"Report:")
-    print(f"    Water: {current_resources["water"]}")
-    print(f"    Milk: {current_resources["milk"]}")
-    print(f"    Coffee: {current_resources["coffee"]}")
-    print(f"    Money: {current_resources["money"]}") 
+    print(f"    Water: {current_resources["water"]}ml")
+    print(f"    Milk: {current_resources["milk"]}ml")
+    print(f"    Coffee: {current_resources["coffee"]}g")
+    print("    Money: {:.2f}".format(current_resources["money"])) 
 
 # 5. Process coins.
     # a. If there are sufficient resources to make the drink selected, then the program should prompt the user to insert coins.
